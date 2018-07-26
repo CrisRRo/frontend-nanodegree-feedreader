@@ -28,8 +28,7 @@ $(function() {
          */
 		 it('have URL (not empty, string type)', function() {
 			 allFeeds.forEach(function(val) {
-				 expect(val.url).toBeDefined();
-				 expect(val.url.length).not.toBe(0);
+				 expect(val.url).toBeTruthy();
 				 expect(typeof val.url).toBe('string');
 			 });
 		 });
@@ -40,8 +39,7 @@ $(function() {
          */
 		 it('have name (not empty, string type)', function() {
 			 allFeeds.forEach(function(val) {
-				 expect(val.name).toBeDefined();
-				 expect(val.name.length).not.toBe(0);
+				 expect(val.name).toBeTruthy();
 				 expect(typeof val.name).toBe('string');
 			 });
 		 });
@@ -55,7 +53,7 @@ $(function() {
         */
 		it('is hidden by default', function() {
 			// "body" default class is "menu-hidden"
-			expect($('body').hasClass('menu-hidden')).toEqual(true);
+			expect($('body').hasClass('menu-hidden')).toBe(true);
 		});
 
         /* This test ensures the menu changes
@@ -65,9 +63,9 @@ $(function() {
         */
 		it('changes visibility on click', function() {
 			menuIcon.click();
-			expect($('body').hasClass('menu-hidden')).toEqual(false);
+			expect($('body').hasClass('menu-hidden')).toBe(false);
 			menuIcon.click();
-			expect($('body').hasClass('menu-hidden')).toEqual(true);
+			expect($('body').hasClass('menu-hidden')).toBe(true);
 		});
 	});
 
@@ -80,14 +78,11 @@ $(function() {
          * we use of Jasmine's beforeEach and asynchronous done() function.
          */
 		beforeEach(function(done) {
-			loadFeed(0, function() {
-				done();
-			});
+			loadFeed(0, done);
 		});
 
-		 it('is at least one entry in the initial feed', function(done) {
-			 expect($('.feed').is(':empty')).toBeFalsy();
-			 done();
+		 it('is at least one entry in the initial feed', function() {
+			 expect($('.feed .entry').length).toBeGreaterThan(0);
 		 });
 	});
 
@@ -111,12 +106,11 @@ $(function() {
 			});
 		 });
 
-		 it('has new content when a new feed is loaded', function(done) {
+		 it('has new content when a new feed is loaded', function() {
 			 // console.log(firstFeed);
 			 // console.log(secondFeed);
 
 			 expect(firstFeed).not.toEqual(secondFeed);
-			 done();
 		 });
 	});
 }());
