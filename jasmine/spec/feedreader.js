@@ -98,9 +98,31 @@ $(function() {
 	});
 
     /* TODO: Write a new test suite named "New Feed Selection" */
-
+    describe('New Feed Selection', function() {
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+		 var firstFeed,
+			 secondFeed;
+
+		 beforeEach(function(done) {
+			loadFeed(0, function() {
+				firstFeed = $('.feed')['0'].innerText;
+
+				loadFeed(1, function() {
+					secondFeed = $('.feed')['0'].innerText;
+					done();
+				});
+			});
+		 });
+
+		 it('has new content when a new feed is loaded', function(done) {
+			 // console.log(firstFeed);
+			 // console.log(secondFeed);
+
+			 expect(firstFeed).not.toEqual(secondFeed);
+			 done();
+		 });
+	});
 }());
