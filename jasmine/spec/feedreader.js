@@ -30,7 +30,7 @@ $(function() {
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
-		 it('has URL not empty and string type', function() {
+		 it('have URL (not empty, string type)', function() {
 			 allFeeds.forEach(function(val) {
 				 expect(val.url).toBeDefined();
 				 expect(val.url.length).not.toBe(0);
@@ -42,7 +42,7 @@ $(function() {
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
-		 it('has name not empty and string type', function() {
+		 it('have name (not empty, string type)', function() {
 			 allFeeds.forEach(function(val) {
 				 expect(val.name).toBeDefined();
 				 expect(val.name.length).not.toBe(0);
@@ -52,18 +52,30 @@ $(function() {
     });
 
     /* TODO: Write a new test suite named "The menu" */
-
+    describe('The menu', function() {
+		var menuIcon = $('.menu-icon-link');
         /* TODO: Write a test that ensures the menu element is
-         * hidden by default. You'll have to analyze the HTML and
-         * the CSS to determine how we're performing the
-         * hiding/showing of the menu element.
-         */
+        * hidden by default. You'll have to analyze the HTML and
+        * the CSS to determine how we're performing the
+        * hiding/showing of the menu element.
+        */
+		it('is hidden by default', function() {
+			// "body" default class is "menu-hidden"
+			expect($('body').hasClass('menu-hidden')).toEqual(true);
+		});
 
-         /* TODO: Write a test that ensures the menu changes
-          * visibility when the menu icon is clicked. This test
-          * should have two expectations: does the menu display when
-          * clicked and does it hide when clicked again.
-          */
+        /* TODO: Write a test that ensures the menu changes
+        * visibility when the menu icon is clicked. This test
+        * should have two expectations: does the menu display when
+        * clicked and does it hide when clicked again.
+        */
+		it('changes visibility on click', function() {
+			menuIcon.click();
+			expect($('body').hasClass('menu-hidden')).toEqual(false);
+			menuIcon.click();
+			expect($('body').hasClass('menu-hidden')).toEqual(true);
+		});
+	});
 
     /* TODO: Write a new test suite named "Initial Entries" */
 
